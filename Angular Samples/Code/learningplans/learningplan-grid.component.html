@@ -1,0 +1,60 @@
+<div *ngIf="paged?.length == 0" style="margin-left: 20px;">
+    No records found.
+</div>
+<div class="table-responsive" *ngIf="paged?.length > 0">
+    <table class="table" id="datatable" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="courseName">EMPLOYEE</th>
+                <th>COURSE CODE</th>
+                <th>DATE ASSIGNED</th>
+                <th>STATUS</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let model of paged">
+                <td class="tdImgContent">
+                    <!-- <img src="../../assets/images/course-img.png" /> -->
+                    <img [src]="image(model.employeeId)" style="width: 45px; height: 45px;" />
+                    <span>{{ model.employee }}</span>
+                </td>
+                <td>{{ model.course }}</td>
+                <td>{{ model.assignedOn | date: "short" }}</td>
+                <td>{{ model.status  }}</td>
+                <td class="gridActionBtn">
+                    <div class="btn-group">
+                        <span class="dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="../../assets/images/action-icon.svg" />
+                        </span>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a [routerLink]="['/learningplans', model.id]">Edit</a>
+                            </li>
+                            <li>
+                                <a (click)="deleteClicked(model)">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="dt-panelfooter clearfix">
+        <div class="dataTables_info grid_info_button" id="datatable_info" role="status" aria-live="polite">
+            Total: {{_collection?.length}}
+        </div>
+        <div class="dataTables_info grid_info_button" style="float: right;" id="datatable_info" role="status" aria-live="polite">
+            Showing: {{paged?.length}}
+        </div>
+        <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+            <ul class="pagination" *ngFor="let page of pager">
+                <li class="paginate_button" [class.active]="_currentPage == page" aria-controls="datatable" tabindex="0">
+                    <a (click)="currentPage = page">{{page}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

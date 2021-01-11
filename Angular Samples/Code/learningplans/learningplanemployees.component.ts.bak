@@ -1,0 +1,47 @@
+import { Component } from '@angular/core';
+import { LearningPlanClient, LearningPlanVM, EmployeeClient } from '../_gen/swagger.gen';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../_services';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { BaseComponent } from '../_services/base.component';
+
+
+@Component({ templateUrl: './learningplanemployees.component.html' })
+export class LearningPlanEmployeesComponent extends BaseComponent<LearningPlanVM, LearningPlanClient> {
+    
+    planId: number
+
+    constructor(
+        router: Router,
+        private learningPlanClient: LearningPlanClient,
+        formBuilder: FormBuilder,
+        alertService: AlertService,
+        private activateRoute: ActivatedRoute){ 
+            super(alertService, router, formBuilder, learningPlanClient)
+        }
+
+    ngOnInit() {
+        this.form = new FormGroup({ })
+        this.planId = +this.activateRoute.snapshot.params["planId"]
+        this.loadLearningPlanEmployees()
+    }
+
+    onSubmit(){
+        let marked = []
+        for (let id in this.form.value) if (this.form.value[id]) marked.push(id)
+        this.client.assigntoemployees(this.planId, marked.join(','))
+            .subscribe(data =>  this.router.navigate(['learningplan']))
+        return false
+    }
+
+    private loadLearningPlanEmployees() {
+        // this.client.getemployees(this.planId).subscribe(data => {
+        //     this.modelCollection = data
+        //     let group = {}
+        //     this.modelCollection.forEach(emp => {
+        //         group[emp.id] = new FormControl(emp.assigned)
+        //     })
+        //     this.form = new FormGroup(group)
+        // }, error => this.errorHandler(error))
+    }
+}

@@ -1,0 +1,442 @@
+<div id="main">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<section id="content_wrapper">
+
+    <!-- -------------- Topbar Menu Wrapper -------------- -->
+    <div id="topbar-dropmenu-wrapper">
+        <div class="topbar-menu row">
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="service-box bg-danger">
+                    <span class="fa fa-music"></span>
+                    <span class="service-title">Audio</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="service-box bg-success">
+                    <span class="fa fa-picture-o"></span>
+                    <span class="service-title">Images</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="service-box bg-primary">
+                    <span class="fa fa-video-camera"></span>
+                    <span class="service-title">Videos</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="service-box bg-alert">
+                    <span class="fa fa-envelope"></span>
+                    <span class="service-title">Messages</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="service-box bg-system">
+                    <span class="fa fa-cog"></span>
+                    <span class="service-title">Settings</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="service-box bg-dark">
+                    <span class="fa fa-user"></span>
+                    <span class="service-title">Users</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- -------------- /Topbar Menu Wrapper -------------- -->
+
+    <!-- -------------- Topbar -------------- -->
+    <header id="topbar" class="hidden">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a href="dashboard1.html">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-active">
+                    <a href="dashboard1.html">Dashboard</a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a href="dashboard1.html">Home</a>
+                </li>
+                <li class="breadcrumb-current-item">Dashboard</li>
+            </ol>
+        </div>
+        <div class="topbar-right">
+            <div class="ib topbar-dropdown">
+                <label for="topbar-multiple" class="control-label">Reporting Period</label>
+                <select id="topbar-multiple" class="hidden">
+                    <optgroup label="Filter By:">
+                        <option value="1-1">Last 30 Days</option>
+                        <option value="1-2" selected="selected">Last 60 Days</option>
+                        <option value="1-3">Last Year</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="ml15 ib va-m" id="sidebar_right_toggle">
+                <div class="navbar-btn btn-group btn-group-number mv0">
+                    <button class="btn btn-sm btn-default btn-bordered prn pln">
+                        <i class="fa fa-bar-chart fs22 text-default"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm btn-bordered hidden-xs"> 3</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- -------------- /Topbar -------------- -->
+
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn">
+
+        <!-- -------------- Column Center -------------- -->
+        <div class="chute chute-center">
+
+            <div>
+
+                <div class="row headingGridFilter">
+                    <div class="col-md-12">
+                        <h4>  Marketplace</h4>
+
+                        <div class="gridFilter">
+                            <ul class="tabs" *ngIf="displayMode === 1">
+                                <li class="active-tab tab-1" (click)="onDisplayModeChange(1)"><img src="../../assets/images/list-icon.svg" /></li>
+                                <li class="tab-2" (click)="onDisplayModeChange(2)"><img src="../../assets/images/grid-icon.svg" /></li>
+                            </ul>
+                            <ul class="tabs" *ngIf="displayMode === 2">
+                                <li class="active-tab tab-1" (click)="onDisplayModeChange(1)"><img src="../../assets/images/list-icon-inactive.png" /></li>
+                                <li class="tab-2" (click)="onDisplayModeChange(2)"><img src="../../assets/images/grid-icon-active.png" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="tabs-content"> -->
+
+                    <!-- Tab 1 -->
+                    <div class="row-marketplace-tab" *ngIf="displayMode === 1">
+                        <div class="row row-marketplace">
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/python-development-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Development</h2>
+                                        <p>Learn to Code in Python 3: Programming beginner to advanced</p>
+                                        <p class="mpAuthor">Ivan Lourenço Gomes</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 20.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/ios-development-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Development</h2>
+                                        <p>iOS 13 & Swift 5 - The Complete iOS App Development Bootcamp</p>
+                                        <p class="mpAuthor">Dr. Angela Yung</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 20.00</p>  
+                                    </div>                              
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/cognitive-development-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>NLP Training</h2>
+                                        <p>Cognitive Behavioural Therapy (CBT) Practitioner Certificate</p>
+                                        <p class="mpAuthor">Kain Ramsay</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 30.00</p>  
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/angular-development-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Development</h2>
+                                        <p>Angular - The Complete Guide (2020 Edition)</p>
+                                        <p class="mpAuthor">Maximilian Schwarzmüller</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 20.00</p>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-marketplace">
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/js-course-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Development</h2>
+                                        <p>The Complete JavaScript Course 2020: Build Real Projects!</p>
+                                        <p class="mpAuthor">Jonas Schmedtmann</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 20.00</p>  
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/vue-guide-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Development</h2>
+                                        <p>Vue JS 2 - The Complete Guide (incl. Vue Router & Vuex)</p>
+                                        <p class="mpAuthor">Maximilian Schwarzmüller</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 20.00</p>  
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/python-blockchain-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Cryptocurrency, Development</h2>
+                                        <p>Python, JS, & React | Build a Blockchain & Cryptocurrency</p>
+                                        <p class="mpAuthor">Kain Ramsay</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$ 30.00</p>  
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-3">
+                                <div class="mpContainer">
+                                    <figure>
+                                        <img src="../../assets/images/marketplace/lg/angular-complete-guide-bg.jpg" />
+                                    </figure>
+                                    <div class="marketplaceContent">
+                                        <h2>Design</h2>
+                                        <p>Angular - The Complete Guide (2020 Edition)</p>
+                                        <p class="mpAuthor">Joe Natoli</p>
+                                        <div class="rating">
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <img src="../../assets/images/star-icon.png" />    
+                                            <span>(58)</span>
+                                        </div>
+                                        <p class="priceMarketplace">$19.99</p>  
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Tab 1 -->
+
+                    <!-- Tab 2 -->
+                    <div class="row row-marketplace-list row-marketplace-tab" *ngIf="displayMode === 2">
+                        <div class="col-md-4 no-padding">
+
+                            <div class="mpContainerList">
+                                <figure>
+                                    <img src="../../assets/images/marketplace/tb/python-development-bg.jpg" />
+                                </figure>
+                                <div class="marketplaceContent">
+                                    <h2>
+                                        Development
+                                        <span class="rating">
+                                            <img src="../../assets/images/star-icon.png" />       
+                                            <span>5.0</span> 
+                                            <span>(58)</span>
+                                        </span>
+                                    </h2>
+                                    <p>Learn to Code in Python 3: Programming beginner to advanced</p>
+                                    <p class="priceMarketplace">$ 20.00</p>
+                                </div>
+                            </div>
+
+                            <div class="mpContainerList activeBox">
+                                <figure>
+                                    <img src="../../assets/images/marketplace/tb/ios-development-bg.jpg" />
+                                </figure>
+                                <div class="marketplaceContent">
+                                    <h2>
+                                        Development
+                                        <span class="rating">
+                                            <img src="../../assets/images/star-icon.png" />       
+                                            <span>5.0</span> 
+                                            <span>(58)</span>
+                                        </span>
+                                    </h2>
+                                    <p>iOS 13 & Swift 5 - The Complete iOS App Development Bootcamp</p>
+                                    <p class="priceMarketplace">$ 19.99</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 no-padding">
+
+                            <div class="mpContainerListView">
+                                <figure>
+                                    <img src="../../assets/images/marketplace/tb/ios-development-bg.jpg" />
+                                </figure>
+                                <div class="marketplaceContent">
+                                    <h2>
+                                        Development
+                                        <span class="rating">
+                                            <img src="../../assets/images/star-icon.png" />  
+                                            <span>5.0</span>  
+                                            <span>(58)</span>
+                                        </span>
+                                    </h2>
+                                    <h3>iOS 13 & Swift 5 - The Complete iOS App Development Bootcamp</h3>
+                                    <p class="mpAuthor"> <span>Created by:</span> Dr. Angela Yung</p>
+
+                                    <div class="descriptionContainer">
+                                        <h4>Description</h4>
+                                        <p>From Beginner to iOS App Developer with Just One Course! Fully Updated with a Comprehensive Module Dedicated to SwiftUI!</p>
+                                        <h4>Who this course is for?</h4>
+                                        <p>If you are an absolute beginner to coding, then take this course.</p>
+                                        <p>If you are a seasoned programmer, then take this course to to get up to speed quickly with Swift 5.1 and native app development. Start with the Xcode walkthrough lesson and we'll get you familiar with iOS development in no time!</p>
+                                        <p>If you are switching from Objective-C to Swift then this is a fast-track way of doing it. You can get started straight away with the Intermediate Swift Language module.</p>
+                                        <p>If you are a pro iOS developer and want to quickly get up to date with Apple's latest technology, then start with the modules on SwiftUI, ARKit and CoreML.</p>
+                                        <h4>Content</h4>
+                                        <ul>
+                                            <li>58.5 Hours on-demand Video</li>
+                                            <li>147 Articles</li>
+                                            <li>11 Downloadable Resources</li>
+                                            <li>1 Coding Exercise</li>
+                                            <li>Full Lifetime Access</li>
+                                            <li>Certification of Completion</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="mpFooterViewBtn">
+
+                                        <div class="sharePrintBtn">
+                                            <a href="javascript:;">
+                                                <img src="../../assets/images/share-icon.svg" />      
+                                            </a>
+                                            <a href="javascript:;">
+                                                <img src="../../assets/images/printer-icon.svg" />      
+                                            </a>
+                                        </div>
+
+                                        <a class="getITPrice" href="javascript:;">Get it ($19.99</a>
+
+                                    </div>
+
+                                </div>                              
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End Tab 2 -->
+                <!-- </div> -->
+
+            </div>
+
+        </div>
+        <!-- -------------- /Column Center -------------- -->
+
+    </section>
+    <!-- -------------- /Content -------------- -->
+
+</section>
+<!-- <script>
+
+$(function () {
+
+    // Grid & List View Tabs
+    var activeIndex = $('.active-tab').index(),
+    $contentlis = $('.tabs-content .row-marketplace-tab'),
+    $tabslis = $('.tabs li');
+
+    // Show content of active tab on loads
+    $contentlis.eq(activeIndex).show();
+
+    $('.tabs').on('click', 'li', function (e) {
+        if($(".gridFilter .tabs li.tab-1.active-tab").length>0){
+            $(".gridFilter .tabs li.tab-2 img").attr("src","images/grid-icon-active.png");
+            $(".gridFilter .tabs li.tab-1 img").attr("src","images/list-icon-inactive.png");
+        }else{
+            $(".gridFilter .tabs li.tab-2 img").attr("src","images/grid-icon.svg");
+            $(".gridFilter .tabs li.tab-1 img").attr("src","images/list-icon.svg");
+        }
+    var $current = $(e.currentTarget),
+        index = $current.index();
+
+    $tabslis.removeClass('active-tab');
+        $current.addClass('active-tab');
+        $contentlis.hide().eq(index).show();
+    });
+    
+    // Marketplace list view tabs
+
+    
+});
+
+</script> -->

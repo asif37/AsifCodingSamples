@@ -1,0 +1,72 @@
+<div id="main">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<section id="content_wrapper">
+
+
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn">
+
+        <!-- -------------- Column Center -------------- -->
+        <div class="chute chute-center">
+
+            <div>
+
+                <div class="headingGridFilter">
+                    <h4>{{model?.title}} ({{types[model?.type]}})</h4>
+
+                    <div class="gridFilter">
+                        <img src="../../assets/images/list-icon.svg" />
+                        <img src="../../assets/images/grid-icon.svg" />
+                    </div>
+                </div>
+
+                <div class="new-course">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="formGroup" *ngIf="[1,2,3].includes(model?.type)">
+                            <div [ngSwitch]="model?.type">
+                                <div *ngSwitchCase="1">
+                                    <video class="blob-holder" controls>
+                                        <source [src]="url" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div *ngSwitchCase="2">
+                                    <iframe class="blob-holder" [src]="url" frameborder="1"></iframe>
+                                </div>
+                                <div *ngSwitchCase="3">
+                                    <div>
+                                        <img class="blob-holder" [src]="url" />
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="4">
+                                    Quiz
+                                </div>
+                            </div>
+                            <label>Content: </label>
+                            <input type="file" class="form-control" (change)="handleFileChange($event.target.files)" />
+                            <div class="upload">
+                                <span *ngIf="uploadProgress > 0 && uploadProgress < 100">
+                                    {{uploadProgress}}% - 
+                                  </span>
+                                  <span *ngIf="uploadProgressMessage">
+                                    {{uploadProgressMessage}}
+                                  </span>
+                            </div>
+                        </div>
+                        <div class="formGroup">
+                            <button class="btn btn-primary">{{model == null ? 'Create' : 'Save'}}</button> &nbsp;
+                            <button class="btn btn-primary" type="button" (click)="cancelEdit()">Cancel</button> &nbsp; 
+                            <button class="btn btn-primary" type="button" (click)="back()">Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- -------------- /Column Center -------------- -->
+
+    </section>
+    <!-- -------------- /Content -------------- -->
+
+</section>

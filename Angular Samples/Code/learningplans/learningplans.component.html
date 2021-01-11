@@ -1,0 +1,36 @@
+<div id="main">
+    <app-header (addClicked)="openAddLearningPlanForm()" (searchEntered)="searched($event)"></app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<section id="content_wrapper">
+    <div>
+        <!-- -------------- Content -------------- -->
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+            <div class="chute chute-center">
+
+                <div>
+
+                    <div class="headingGridFilter">
+                        <div class="row">
+                            <div class="col-md-11 headingGridFilter">
+                                <h4>Learning Plans</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="panel panel-visible panel-custom-table">
+                            <div class="panel-body pn">
+                                <learningplan-grid [collection]="modelCollection" [search]="search" [pageSize]="10" (deleteLearningPlan)="deleteLearningPlan($event)"></learningplan-grid>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+</section>

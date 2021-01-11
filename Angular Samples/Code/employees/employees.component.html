@@ -1,0 +1,108 @@
+<div id="main">
+    <app-header (addClicked)="add()" (searchEntered)="searched($event)">
+    </app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<section id="content_wrapper">
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn">
+        <!-- -------------- Column Center -------------- -->
+        <div class="chute chute-center">
+            <div>
+                <div class="new-course" [ngClass]="{ hidden: !editFormVisible }">
+                    <div class="headingGridFilter">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h1 class="courseHeading" (click)="closeEditForm()">Add Employee</h1>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="tab-row-sections">
+                                <h2>Basic Details</h2>
+                                <p>Add some of your employee’s details here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="modelCollection?.length > 0" [ngClass]="{ hidden: editFormVisible }">
+                    <div class="headingGridFilter">
+                        <div class="row">
+                            <div class="col-md-11 headingGridFilter">
+                                <h4>Employees</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-visible panel-custom-table">
+                        <div class="panel-body pn">
+                            <employees-grid [collection]="modelCollection" [search]="search" [pageSize]="10"
+                                (editEmployee)="editEmployee($event)" (deleteEmployee)="deleteEmployee($event)"></employees-grid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -------------- /Column Center -------------- -->
+    </section>
+    <!-- -------------- /Content -------------- -->
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-content" style="border-radius: 15px; background: rgb(249, 250, 250);">
+                <div class="modal-header" style="border-bottom: 0; margin: 10px;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px;">Add Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        style="margin-top: -24px; margin-right: 10px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-row-general mb-25">
+                                <div class="file-drop-area" style="background: #fff;">
+                                    <!-- <span class="fake-btn">Choose files</span> -->
+                                    <span class="file-msg">Drag & Drop <em>maxium file size 1mb</em></span>
+                                    <input class="file-input" type="file" name="file" (change)="fileSelected($event.target)">
+                                    <input type="button" value="Upload" onclick="$(this).prev().click()">
+                                </div>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.name)? 'Invalid input': 'Name'" formControlName="name">
+                                <label class="label-helper" for="input">Name</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input" placeholder="Employee Number"
+                                    formControlName="employeeNumber">
+                                <label class="label-helper" for="input">Employee Number</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input" placeholder="Email"
+                                    formControlName="email">
+                                <label class="label-helper" for="input">Email</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <textarea class="input-text" id="input" placeholder="Description" (keyup)="tarku($event.target)" maxlength="1000"
+                                    formControlName="description"></textarea>
+                                <label class="label-helper" for="input">Description</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                                <span class="char">(0 out of 1000 char.)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modalFooter" style="margin-bottom: 20px;">
+                    <button class="orange-btn" type="button" type="submit" [disabled]="form.invalid || ajax_inprogress">
+                        {{ (ajax_inprogress ? "Processing" : (model == null ? "ADD" : "SAVE")) }}
+                    </button> &nbsp; 
+                    <button class="grey-btn" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

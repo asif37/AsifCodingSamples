@@ -1,0 +1,100 @@
+<div id="main">
+    <app-header [displaySearch]="false"></app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<style>
+    .list-group button:hover {
+        background-color: #fafafa;
+    }
+</style>
+<section id="content_wrapper">
+    <div>
+        <!-- -------------- Content -------------- -->
+        <section id="content" class="table-layout animated fadeIn bg-white course-content-box">
+
+            <!-- -------------- Column Center -------------- -->
+            <div class="courseContainer">
+
+                <div class="progress progress-bar-xxs mnw100 custom-progress-bar">
+                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                         aria-valuenow="15"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                        <span class="sr-only">15%</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-50">
+                        <h1 class="courseHeading" (click)="back()">Add Learning Plan for Employees</h1>
+                    </div>
+                </div>
+                <!-- -------------- /Column Center -------------- -->
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="form-row-general mb-25">
+                            <input type="text" class="input-text" autocomplete="off" id="input" placeholder="Learn Python : For Beginners" 
+                                [(ngModel)]="courseSearch" (input)="searchChanged()" (keyup)="searchKey($event)">
+                            <label class="label-helper" for="input">Select Course</label>
+                            <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            <div class="list-group" *ngIf="displayCourseDropdown" style="position: absolute; z-index: 1000; width: 100%;">
+                                <button type="button" 
+                                    [class.active]="currentSelectedCourse == course"
+                                    style="width: 50%; text-align: left;"
+                                    *ngFor="let course of courseSearched"
+                                    (click)="courseSelected(course)"
+                                    class="list-group-item list-group-item-action">{{course.name}}</button>
+                            </div>
+                        </div>
+                        <div class="form-row-general mb-25">
+                            <div class="input-group date" id="datetimepicker2">
+                                <input type="text" placeholder="Target Completion Date" class="form-control">
+                                <span class="input-group-addon cursor">
+                                    <img src="assets/images/calendar-icon.svg">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-row-general">
+                            <div class="subject-info-box-1">
+                                <label> Employee List </label>
+                                <div class="mb-20">
+                                    <input name="" class="" placeholder="Search" type="search" [(ngModel)]="employeeSearch" />
+                                </div>
+                                <ul class="scrollbar" id="lstBox1">
+                                <li *ngFor="let e of employeeSearched" [class.active]="e.selected" (click)="employeeClicked(e)">
+                                    <img [src]="image(e.id)"> {{e.name}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="subject-info-arrows text-center">
+                                <input type='button' id='btnRight' value='' class="btn btn-default" (click)="moveSelected()" /><br />
+                                <input type='button' id='btnAllRight' value='' class="btn btn-default" (click)="moveAll()" /><br />
+                                <input type='button' id='btnLeft' value='' class="btn btn-default" (click)="unmoveSelected()" /><br />
+                                <input type='button' id='btnAllLeft' value='' class="btn btn-default" (click)="unmoveAll()" />
+                            </div>
+                            <div class="subject-info-box-2">
+                                <label> Selected Employee(s) </label>
+                                <ul class="scrollbar" id="lstBox2">
+                                    <li *ngFor="let e of selectedEmployeesList" [class.active]="e.selected" (click)="employeeClicked(e)">
+                                        <img [src]="image(e.id)"> {{e.name}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="buttons-panel mpFooterViewBtn">
+                    <div class="sharePrintBtn">
+                        <a (click)="back()">
+                            <img src="../../assets/images/left-arrow.png" />
+                        </a>
+                    </div>
+                    <button class="getITPrice" [disabled]="selectedCourse == null || ajax_inprogress" (click)="submit()">
+                        {{ (ajax_inprogress ? "Processing" : (learningPlanId == 0 ? "ADD" : "SAVE")) }}
+                    </button> &nbsp; 
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

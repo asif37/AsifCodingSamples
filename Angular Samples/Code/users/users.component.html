@@ -1,0 +1,165 @@
+﻿<div id="main">
+    <app-header [displaySearch]="false"(addClicked)="addClicked()"></app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<section id="content_wrapper">
+
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn">
+
+        <!-- -------------- Column Center -------------- -->
+        <div class="chute chute-center">
+            <div>
+                <div class="headingGridFilter">
+                    <h4>Users</h4>
+                </div>
+                <br />
+                <div class="tabs-content">
+                <div class="row-tab-content" style="display: block;">
+                    <div class="row row-marketplace">
+                        <ng-container *ngFor="let user of modelCollection">
+                            <div class="col-md-3">
+                                <div class="user-grid-content" [style.background]="user.active ? '#fff' : '#efefef'">
+                                    <img [src]="image(user.id)" style="width: 57px; height: 57px;" />
+                                    <section>
+                                        <p>{{user.firstName + ' ' + user.lastName}}</p>
+                                        <span style="font-size: 0.8em;">ADMINISTRATOR</span>
+                                    </section>
+                                    <div class="gridActionBtn grid-action-icon">
+                                        <div class="btn-group" >
+                                            <span class="dropdown-toggle" data-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <img src="../../assets/images/action-icon.svg" />
+                                            </span>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li>
+                                                    <a (click)="deactivate(user)"><img src="../../assets/images/deactivate-icon.svg">{{user.active ? "Deactivate" : "Activate"}}</a>
+                                                </li>
+                                                <li>
+                                                    <a (click)="delete(user)"><img src="../../assets/images/delete-icon.svg">Delete</a>
+                                                </li>
+                                                <li>
+                                                    <a (click)="edit(user)"><img src="../../assets/images/delete-icon.svg">Edit</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        <!-- -------------- /Column Center -------------- -->
+
+    </section>
+    <!-- -------------- /Content -------------- -->
+
+</section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-content" style="border-radius: 15px; background: rgb(249, 250, 250);">
+                <div class="modal-header" style="border-bottom: 0; margin: 10px;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px;">Add Admin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        style="margin-top: -24px; margin-right: 10px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-row-general mb-25">
+                                <div class="file-drop-area" style="background: #fff;">
+                                    <!-- <span class="fake-btn">Choose files</span> -->
+                                    <span class="file-msg">Drag & Drop <em>maxium file size 1mb</em></span>
+                                    <input class="file-input" type="file" name="file" (change)="fileSelected($event.target)">
+                                    <input type="button" value="Upload" onclick="$(this).prev().click()">
+                                </div>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.userName)? 'Invalid input': 'Username'" formControlName="userName">
+                                <label class="label-helper" for="input">Username</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.lastName)? 'Invalid input': 'Last Name'" formControlName="lastName">
+                                <label class="label-helper" for="input">Last Name</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.firstName)? 'Invalid input': 'First Name'" formControlName="firstName">
+                                <label class="label-helper" for="input">First Name</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.email)? 'Invalid input': 'Email'" formControlName="email">
+                                <label class="label-helper" for="input">Email</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.jobTitle)? 'Invalid input': 'Job Title'" formControlName="jobTitle">
+                                <label class="label-helper" for="input">Job Title</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <textarea class="input-text" id="input" placeholder="About Me" (keyup)="tarku($event.target)" maxlength="300"
+                                    formControlName="aboutMe"></textarea>
+                                <label class="label-helper" for="input">About Me</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                                <span class="char">(0 out of 300 char.)</span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.mobilePhone)? 'Invalid input': 'Mobile Phone'" formControlName="mobilePhone">
+                                <label class="label-helper" for="input">Mobile Phone</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.address)? 'Invalid input': 'Address'" formControlName="address">
+                                <label class="label-helper" for="input">Address</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.city)? 'Invalid input': 'City'" formControlName="city">
+                                <label class="label-helper" for="input">City</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.zipCode)? 'Invalid input': 'Zip Code'" formControlName="zipCode">
+                                <label class="label-helper" for="input">Zip Code</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                            <div class="form-row-general mb-25">
+                                <input type="text" class="input-text" id="input"
+                                    [placeholder]="invalid(f.state)? 'Invalid input': 'State'" formControlName="state">
+                                <label class="label-helper" for="input">State</label>
+                                <span class="closeIcon"><img src="assets/images/close-icon.png"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modalFooter" style="margin-bottom: 20px;">
+                    <button class="orange-btn" type="button" type="submit" [disabled]="form.invalid || ajax_inprogress">
+                        {{ (ajax_inprogress ? "Processing" : (model == null ? "ADD" : "SAVE")) }}
+                    </button> &nbsp; 
+                    <button class="grey-btn" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div id="main">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+</div>
+<section id="content_wrapper">
+
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn">
+
+        <!-- -------------- Column Center -------------- -->
+        <div class="chute chute-center">
+
+            <div>
+
+                <div class="headingGridFilter">
+                    <h4>Employees</h4>
+
+                    <div class="gridFilter">
+                        <img src="../../assets/images/list-icon.svg" />
+                        <img src="../../assets/images/grid-icon.svg" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="panel panel-visible panel-custom-table">
+                        <div class="panel-body pn">
+                            <div class="table-responsive">
+                                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                                    <table class="table" id="datatable" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="courseName">Full Name</th>
+                                                <th class="align-center">Assigned</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let employee of modelCollection">
+                                                <td class="tdImgContent">
+                                                    <img src="../../assets/images/serena-ward.png">
+                                                    <span>{{employee.name}}</span>
+                                                </td>
+                                                <td class="align-center">
+                                                    <input type="checkbox" formControlName="{{employee.id}}" [checked]="employee.assigned" />
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="buttons-panel">
+                                        <button class="btn btn-primary">Save</button> &nbsp;
+                                        <button class="btn btn-primary" type="button" (click)="router.navigate(['/learningplan'])">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- -------------- /Column Center -------------- -->
+
+    </section>
+    <!-- -------------- /Content -------------- -->
+
+</section>
